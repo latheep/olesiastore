@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OlesiaStore eBay HTML Template Maker</title>
+  <style>
+    :root {
+      --blue: #1f4e79;
+      --light: #f6f8fb;
+      --border: #d9e1ea;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --accent: #e8f1fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+    }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      min-height: 100vh;
+    }
+
+    .panel {
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .preview-wrap {
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0 0 8px;
+      color: var(--blue);
+    }
+
+    .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .group {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+
+    .group h2 {
+      font-size: 15px;
+      margin: 0 0 12px;
+      color: var(--blue);
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 10px 0 6px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    button {
+      border: none;
+      background: var(--blue);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button.secondary {
+      background: #475569;
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .template {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .topbar {
+      background: var(--blue);
+      color: white;
+      padding: 16px 24px;
+      text-align: center;
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.4px;
+    }
+
+    .topbar p {
+      margin: 6px 0 0;
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .section {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 20px;
+      color: var(--blue);
+      margin: 0 0 14px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.7;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border: 1px solid var(--border);
+    }
+
+    .meta-grid div {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-grid div:nth-child(odd) {
+      background: #f9fbfd;
+      font-weight: bold;
+    }
+
+    .meta-grid div:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: var(--accent);
+      color: var(--blue);
+    }
+
+    .measure-box {
+      border: 1px dashed #9ca3af;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .measure-box img {
+      max-width: 100%;
+      max-height: 360px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .policy-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .policy-card h3 {
+      margin: 0 0 10px;
+      color: var(--blue);
+    }
+
+    .codebox {
+      width: 100%;
+      min-height: 240px;
+      font-family: monospace;
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; }
+      .panel { border-right: none; border-bottom: 1px solid var(--border); }
+      .policy-grid, .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <h1>OlesiaStore eBay Template Maker</h1>
+      <div class="sub">Fill the fields, preview the design, and copy the HTML for your eBay listing.</div>
+
+      <div class="group">
+        <h2>Basic Info</h2>
+        <label>Store Name</label>
+        <input type="text" id="storeName" value="OlesiaStore" />
+
+        <label>Tagline</label>
+        <input type="text" id="tagline" value="Selling Brand Name Clothing" />
+
+        <label>Category / Garment Type</label>
+        <select id="garmentType">
+          <option>T-Shirt or Shirt</option>
+          <option>Pants</option>
+          <option>Shorts</option>
+          <option>Jackets</option>
+        </select>
+
+        <label>Measurement Image URL</label>
+        <input type="url" id="measureImage" placeholder="Paste image URL here" />
+        <div class="small">Use a different image for each garment type.</div>
+      </div>
+
+      <div class="group">
+        <h2>Feature Points</h2>
+        <label>Features (one per line)</label>
+        <textarea id="features">Brand Name Clothing
+Quality checked before shipping
+Please check measurements before purchase
+Actual color may vary slightly due to screen settings</textarea>
+      </div>
+
+      <div class="group">
+        <h2>Fabric & Measurements</h2>
+        <label>Fabric Type</label>
+        <input type="text" id="fabricType" value="Cotton Blend" />
+
+        <label>Measurement Table Columns</label>
+        <input type="text" id="tableHeaders" value="Size,Chest,Length,Sleeve" />
+
+        <label>Measurement Table Rows</label>
+        <textarea id="tableRows">S,36,27,8
+M,40,28,8.5
+L,44,29,9
+XL,48,30,9.5</textarea>
+        <div class="small">One size row per line. Use commas between values.</div>
+      </div>
+
+      <div class="group">
+        <h2>Policies</h2>
+        <label>Shipping Policy</label>
+        <textarea id="shippingPolicy">We ship orders quickly and carefully. Orders are usually processed within 1 business day. Delivery times may vary depending on destination and carrier. Tracking will be uploaded once the order is shipped.</textarea>
+
+        <label>Return Policy</label>
+        <textarea id="returnPolicy">Returns are accepted within 30 days of delivery. Item must be returned in original condition. Please review measurements and item details carefully before purchase.</textarea>
+      </div>
+
+      <div class="btns">
+        <button onclick="renderTemplate()">Update Preview</button>
+        <button class="secondary" onclick="copyHtml()">Copy HTML</button>
+      </div>
+
+      <label style="margin-top:16px;">Generated HTML</label>
+      <textarea id="htmlOutput" class="codebox"></textarea>
+    </div>
+
+    <div class="preview-wrap">
+      <div id="preview"></div>
+    </div>
+  </div>
+
+  <script>
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function nlToList(text) {
+      return text
+        .split('\n')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(item => `<li>${escapeHtml(item)}</li>`)
+        .join('');
+    }
+
+    function buildTable(headersText, rowsText) {
+      const headers = headersText.split(',').map(h => h.trim()).filter(Boolean);
+      const rows = rowsText.split('\n').map(r => r.trim()).filter(Boolean);
+
+      const headHtml = headers.map(h => `<th>${escapeHtml(h)}</th>`).join('');
+      const bodyHtml = rows.map(row => {
+        const cells = row.split(',').map(c => c.trim());
+        return `<tr>${cells.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`;
+      }).join('');
+
+      return `<table><thead><tr>${headHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`;
+    }
+
+    function renderTemplate() {
+      const storeName = document.getElementById('storeName').value || 'OlesiaStore';
+      const tagline = document.getElementById('tagline').value || '';
+      const garmentType = document.getElementById('garmentType').value || '';
+      const measureImage = document.getElementById('measureImage').value.trim();
+      const features = document.getElementById('features').value;
+      const fabricType = document.getElementById('fabricType').value || '';
+      const tableHeaders = document.getElementById('tableHeaders').value || '';
+      const tableRows = document.getElementById('tableRows').value || '';
+      const shippingPolicy = document.getElementById('shippingPolicy').value || '';
+      const returnPolicy = document.getElementById('returnPolicy').value || '';
+
+      const measureImageHtml = measureImage
+        ? `<img src="${escapeHtml(measureImage)}" alt="How to measure ${escapeHtml(garmentType)}" />`
+        : '';
+
+      const html = `
+<div style="max-width:980px;margin:0 auto;background:#ffffff;border:1px solid #d9e1ea;font-family:Arial,Helvetica,sans-serif;color:#1f2937;">
+  <div style="background:#1f4e79;color:#ffffff;padding:16px 24px;text-align:center;">
+    <h2 style="margin:0;font-size:28px;">${escapeHtml(storeName)}</h2>
+    <p style="margin:6px 0 0;font-size:14px;">${escapeHtml(tagline)}</p>
+  </div>
+
+  <div style="padding:22px 24px;border-bottom:1px solid #d9e1ea;">
+    <h3 style="font-size:20px;color:#1f4e79;margin:0 0 14px;border-bottom:2px solid #e8f1fb;padding-bottom:8px;">Product Features</h3>
+    <ul style="margin:0;padding-left:18px;line-height:1.7;">
+      ${nlToList(features)}
+    </ul>
+  </div>
+
+  <div style="padding:22px 24px;border-bottom:1px solid #d9e1ea;">
+    <h3 style="font-size:20px;color:#1f4e79;margin:0 0 14px;border-bottom:2px solid #e8f1fb;padding-bottom:8px;">Fabric Details</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;border:1px solid #d9e1ea;">
+      <tr>
+        <td style="padding:12px;border:1px solid #d9e1ea;background:#f9fbfd;font-weight:bold;width:200px;">Garment Type</td>
+        <td style="padding:12px;border:1px solid #d9e1ea;">${escapeHtml(garmentType)}</td>
+      </tr>
+      <tr>
+        <td style="padding:12px;border:1px solid #d9e1ea;background:#f9fbfd;font-weight:bold;">Fabric Type</td>
+        <td style="padding:12px;border:1px solid #d9e1ea;">${escapeHtml(fabricType)}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="padding:22px 24px;border-bottom:1px solid #d9e1ea;">
+    <h3 style="font-size:20px;color:#1f4e79;margin:0 0 14px;border-bottom:2px solid #e8f1fb;padding-bottom:8px;">Measurement Chart</h3>
+    ${buildTable(tableHeaders, tableRows)}
+    <div style="border:1px dashed #9ca3af;background:#fafafa;border-radius:12px;padding:18px;text-align:center;margin-top:16px;">
+      ${measureImageHtml}
+      <div style="font-size:14px;color:#6b7280;">How to measure: ${escapeHtml(garmentType)}</div>
+    </div>
+  </div>
+
+  <div style="padding:22px 24px;">
+    <h3 style="font-size:20px;color:#1f4e79;margin:0 0 14px;border-bottom:2px solid #e8f1fb;padding-bottom:8px;">Policies</h3>
+    <table style="width:100%;border-collapse:separate;border-spacing:16px 0;">
+      <tr>
+        <td style="vertical-align:top;width:50%;">
+          <div style="border:1px solid #d9e1ea;border-radius:12px;padding:16px;background:#fbfdff;">
+            <h4 style="margin:0 0 10px;color:#1f4e79;font-size:18px;">Shipping Policy</h4>
+            <div style="line-height:1.7;font-size:14px;">${escapeHtml(shippingPolicy)}</div>
+          </div>
+        </td>
+        <td style="vertical-align:top;width:50%;">
+          <div style="border:1px solid #d9e1ea;border-radius:12px;padding:16px;background:#fbfdff;">
+            <h4 style="margin:0 0 10px;color:#1f4e79;font-size:18px;">Return Policy</h4>
+            <div style="line-height:1.7;font-size:14px;">${escapeHtml(returnPolicy)}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>`.trim();
+
+      const previewShell = `
+<div class="template">
+  <div class="topbar">
+    <h2>${escapeHtml(storeName)}</h2>
+    <p>${escapeHtml(tagline)}</p>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Product Features</h3>
+    <ul class="bullet-list">${nlToList(features)}</ul>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Fabric Details</h3>
+    <div class="meta-grid">
+      <div>Garment Type</div><div>${escapeHtml(garmentType)}</div>
+      <div>Fabric Type</div><div>${escapeHtml(fabricType)}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Measurement Chart</h3>
+    ${buildTable(tableHeaders, tableRows)}
+    <div class="measure-box" style="margin-top:16px;">
+      ${measureImageHtml}
+      <div>How to measure: ${escapeHtml(garmentType)}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Policies</h3>
+    <div class="policy-grid">
+      <div class="policy-card">
+        <h3>Shipping Policy</h3>
+        <div style="line-height:1.7;">${escapeHtml(shippingPolicy)}</div>
+      </div>
+      <div class="policy-card">
+        <h3>Return Policy</h3>
+        <div style="line-height:1.7;">${escapeHtml(returnPolicy)}</div>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+      document.getElementById('preview').innerHTML = previewShell;
+      document.getElementById('htmlOutput').value = html;
+    }
+
+    function copyHtml() {
+      const output = document.getElementById('htmlOutput');
+      output.select();
+      output.setSelectionRange(0, 999999);
+      document.execCommand('copy');
+      alert('HTML copied.');
+    }
+
+    renderTemplate();
+  </script>
+</body>
+</html>
