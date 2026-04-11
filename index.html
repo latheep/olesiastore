@@ -371,13 +371,17 @@ XL,48,30,9.5</textarea>
       const headers = headersText.split(',').map(h => h.trim()).filter(Boolean);
       const rows = rowsText.split('\n').map(r => r.trim()).filter(Boolean);
 
-      const headHtml = headers.map(h => `<th>${escapeHtml(h)}</th>`).join('');
+      const thStyle = 'border:1px solid #d9e1ea;padding:10px;text-align:center;background:#e8f1fb;color:#1f4e79;font-weight:bold;';
+      const tdStyle = 'border:1px solid #d9e1ea;padding:10px;text-align:center;';
+      const tableStyle = 'width:100%;border-collapse:collapse;font-size:14px;';
+
+      const headHtml = headers.map(h => `<th style="${thStyle}">${escapeHtml(h)}</th>`).join('');
       const bodyHtml = rows.map(row => {
         const cells = row.split(',').map(c => c.trim());
-        return `<tr>${cells.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`;
+        return `<tr>${cells.map(c => `<td style="${tdStyle}">${escapeHtml(c)}</td>`).join('')}</tr>`;
       }).join('');
 
-      return `<table><thead><tr>${headHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`;
+      return `<table style="${tableStyle}"><thead><tr>${headHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`;
     }
 
     function renderTemplate() {
